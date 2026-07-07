@@ -1,0 +1,77 @@
+<!-- /views/index.ejs -->
+<%- include('partials/header') %>
+
+<main>
+	<!-- Hero Section -->
+	<section class="hero" style="background-image: url('/images/heroes/<%= heroImage %>');">
+		<div class="hero-overlay">
+			<h1>Free Crane Specs</h1>
+			<p class="tagline">Home of <%= totalSpecs %> Crane Specifications and Load Charts</p>
+			
+			<!-- Search Form -->
+			<form action="/browse" method="GET" class="search-form">
+				<div class="form-group">
+					<label>Manufacturer</label>
+					<select name="manufacturer" required>
+						<option value="">Select Manufacturer</option>
+						<% manufacturers.forEach(m => { %>
+							<option value="<%= m %>"><%= m %></option>
+						<% }) %>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label>Model</label>
+					<input type="text" name="model" placeholder="e.g. LTM 1120 or GMK4023" />
+				</div>
+				
+				<button type="submit" class="btn-primary">Find Specs & Load Charts</button>
+			</form>
+		</div>
+	</section>
+
+	<!-- Wide Ad Banner -->
+	<section class="ad-wide">
+		<a href="https://www.CraneNetwork.com" target="_blank" rel="noopener">
+			<img src="/images/ads/CN-ad-banner-wide-smaller.jpg" alt="Crane Network Services">
+		</a>
+	</section>
+
+	<!-- Content Section -->
+	<section class="content-section" style="background-image: url('/images/crane-site-background.jpg');">
+		<div class="container">
+			<div class="welcome-text">
+				<p>
+					Welcome to Free Crane Specs — home of <%= totalSpecs %> Crane Specifications and Load Charts.<br><br>
+					All .pdf crane manufacturer information provided is for reference only. <br>
+					<strong>Do not operate any crane based on the information provided.</strong> <br>
+					Consult the original crane owner’s manual provided by the manufacturer prior to operating any crane.
+				</p>
+			</div>
+
+			<div class="popular-section">
+				<h2>Popular Manufacturers</h2>
+				<div class="manufacturer-grid">
+					<a href="/browse?manufacturer=Liebherr" class="brand-card">Liebherr</a>
+					<a href="/browse?manufacturer=Manitowoc" class="brand-card">Manitowoc</a>
+					<a href="/browse?manufacturer=Tadano" class="brand-card">Tadano</a>
+					<a href="/browse?manufacturer=Grove" class="brand-card">Grove</a>
+					<!-- Add more as needed -->
+				</div>
+			</div>
+			<!-- Browse All CTA -->
+			<div class="browse-cta">
+				<a href="/browse" class="btn-secondary">Browse All <%= totalSpecs %> Specifications →</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Square Ad -->
+	<section class="ad-square">
+		<a href="https://www.CraneNetwork.com" target="_blank" rel="noopener">
+			<img src="/images/ads/CN-ad-freecranespec-smaller.jpg" alt="Crane Network Services">
+		</a>
+	</section>
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,91 @@
+<%- include('partials/header') %>
+
+<main class="browse-page">
+	<div class="container">
+		<h1>Browse All Specifications (<%= cranes.length %> found)</h1>
+
+		<!-- Filters -->
+		<form method="GET" class="filter-form">
+			<div class="filter-row">
+				<div class="filter-field">
+					<label>Manufacturer</label>
+					<select name="manufacturer">
+						<option value="">All Manufacturers</option>
+						<% manufacturers.forEach(m => { %>
+							<option value="<%= m %>" <%= query.manufacturer === m ? 'selected' : '' %>><%= m %></option>
+						<% }) %>
+					</select>
+				</div>
+
+				<div class="filter-field">
+					<label>Model</label>
+					<input type="text" name="model" 
+							placeholder="e.g. LTM1120, GMK4023, or 4023" 
+							value="<%= query.model || '' %>">
+				</div>
+
+				<!-- Buttons wrapped together -->
+				<div class="filter-buttons">
+					<button type="submit" class="btn-primary">Apply Filters</button>
+					<button type="button" onclick="window.location='/browse'" class="btn-secondary">Clear Filters</button>
+    			</div>
+			</div>
+		</form>
+
+		<!-- Results Table -->
+		<table class="spec-table">
+			<thead>
+				<tr>
+					<th>Manufacturer</th>
+					<th>Model</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% cranes.forEach(crane => { %>
+					<tr>
+						<td><%= crane.manufacturer %></td>
+						<td><%= crane.model %></td>
+						<td>
+						<a href="#" onclick="showPDF('<%= crane.pdfUrl %>', '<%= crane.manufacturer %> <%= crane.model %>')" 
+							class="view-btn">View PDF</a>
+						</td>
+					</tr>
+				<% }) %>
+			</tbody>
+		</table>
+		<% if (cranes.length === 0) { %>
+			<p class="no-results">No specifications found matching your filters.</p>
+		<% } %>
+	</div>
+</main>
+
+<!-- PDF Modal -->
+<div id="pdfModal" class="modal">
+	<div class="modal-content">
+		<span class="close" onclick="closePDF()">&times;</span>
+		<h3 id="pdfTitle"></h3>
+		<iframe id="pdfFrame" frameborder="0"></iframe>
+	</div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+function showPDF(url, title) {
+	document.getElementById('pdfTitle').textContent = title;
+	document.getElementById('pdfFrame').src = url;
+	document.getElementById('pdfModal').style.display = 'block';
+}
+
+function closePDF() {
+	document.getElementById('pdfModal').style.display = 'none';
+	document.getElementById('pdfFrame').src = ''; // unload pdf
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+	const modal = document.getElementById('pdfModal');
+	if (event.target === modal){ closePDF(); }
+}
+</script>

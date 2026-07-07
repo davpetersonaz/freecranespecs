@@ -1,0 +1,514 @@
+/* /public/css/style.css */
+body {
+	background: #f8f9fa;
+	color: #222;
+	font-family: 'Segoe UI', Arial, sans-serif;
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+}
+
+/* ================== HEADER / NAV ================== */
+
+.main-nav {
+	background: #1a1a1a;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+	color: white;
+	padding: 1rem 0;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+.nav-container {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 0 auto;
+	max-width: 1200px;
+	padding: 0 20px;
+}
+
+.logo {
+	color: white;
+	font-size: 1.65rem;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.logo:hover {
+	color: #ffcc00;
+}
+
+.nav-links {
+	display: flex;
+	gap: 2rem;
+}
+
+.nav-links a {
+	border-radius: 6px;
+	color: white;
+	font-weight: 500;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+.nav-links a:hover {
+	background: #c8102e;
+	color: white;
+}
+
+/* Make nav responsive on mobile */
+@media (max-width: 768px) {
+	.nav-container {
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.nav-links {
+		gap: 1rem;
+	}
+}
+
+/* ================== GLOBAL CONTAINER ================== */
+
+.container {
+	margin: 0 auto;
+	max-width: 95%;
+	padding: 0 20px;
+	width: 100%;
+}
+
+/* Optional: Slightly larger max-width on very big screens */
+@media (min-width: 1400px) {
+	.container {
+		max-width: 1320px;
+	}
+}
+
+/* ================== HOMEPAGE HERO ================== */
+
+.hero {
+	align-items: center;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	color: white;
+	display: flex;
+	height: 65vh;
+	justify-content: center;
+	min-height: 520px;
+	position: relative;
+	text-align: center;
+}
+
+/* Add a dark overlay gradient for better text readability */
+.hero::before {
+	background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.65));
+	bottom: 0;
+	content: '';
+	left: 0; 
+	position: absolute;
+	right: 0; 
+	top: 0; 
+	z-index: 1;
+}
+
+.hero-overlay {
+	background: rgba(0,0,0,0.45);
+	border-radius: 12px;
+	max-width: 820px;
+	padding: 3rem 2.5rem;
+	position: relative;
+	z-index: 2;
+}
+
+.hero h1 {
+	font-size: 3.5rem;
+	margin: 0 0 0.5rem;
+	text-shadow: 0 3px 10px rgba(0,0,0,0.8);
+}
+
+/* ================== HOMEPAGE SEARCH SPECS ================== */
+
+.search-form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	justify-content: center;
+	margin-top: 2rem;
+}
+
+.form-group label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+
+.form-group select, .form-group input {
+	border: none;
+	border-radius: 6px;
+	font-size: 1.1rem;
+	min-width: 220px;
+	padding: 12px 16px;
+}
+
+/* ================== HOMEPAGE CONTENT SECTION ================== */
+
+.content-section {
+	background-position: center;
+	background-size: cover;
+	color: white;
+	padding: 4rem 0;
+	position: relative;
+}
+
+.content-section::before {
+	background: rgba(0, 0, 0, 0.65);
+	bottom: 0;
+	content: '';
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+.content-section .container {
+	position: relative;
+	z-index: 2;
+}
+
+.welcome-text {
+	font-size: 1.15rem;
+	line-height: 1.7;
+	margin: 0 auto 3rem;
+	max-width: 900px;
+	text-align: center;
+}
+
+/* ================== HOMEPAGE POPULARS ================== */
+
+.popular-section h2 {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.manufacturer-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+.brand-card {
+	background: rgba(255,255,255,0.95);
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+	color: #222;
+	font-size: 1.25rem;
+	font-weight: 600;
+	padding: 1.2rem 2rem;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+.brand-card:hover {
+	border-color: #c8102e;
+	box-shadow: 0 10px 20px rgba(200, 16, 46, 0.3);
+	transform: translateY(-6px);
+}
+
+/* ================== HOMEPAGE BANNERS ================== */
+
+.ad-wide {
+	background: #eeeeee;
+	padding: 2rem 0;
+	text-align: center;
+}
+
+.ad-wide img {
+	display: block;
+	margin: 0 auto;
+	max-height: 110px;
+	max-width: 100%;
+	object-fit: contain;
+	width: auto;
+}
+
+.ad-square {
+	background: #eeeeee;
+	padding: 2rem 0;
+	text-align: center;
+}
+
+.ad-square img {
+	box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+	max-width: 420px;
+	width: 100%;
+}
+
+.ad-square,
+.ad-wide {
+	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
+}
+
+.browse-cta {
+	margin: 2rem 0;
+	text-align: center;
+}
+
+/* ================== BROWSE PAGE ================== */
+
+.browse-page {
+	padding: 2rem 0;
+}
+
+.browse-page .container {
+	max-width: 95%;
+}
+
+/* Center the Browse page title */
+.browse-page h1 {
+	color: #1a1a1a;
+	font-size: 2.1rem;
+	margin: 1.5rem 0 2rem;
+	text-align: center;
+}
+
+.filter-form {
+	background: #f4f4f4;
+	border-radius: 8px;
+	margin: 0 auto 2.5rem;
+	max-width: 900px;
+	padding: 2rem 2.5rem;
+}
+
+.filter-row {
+	align-items: flex-end;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	justify-content: center;
+}
+
+.filter-row > div {
+	flex: 1;
+	min-width: 220px;
+}
+
+.filter-row label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 6px;
+}
+
+.filter-row input, 
+.filter-row select {
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 1rem;
+	padding: 10px 12px;
+	width: 100%;
+}
+
+.filter-field {
+	flex: 0 0 280px;
+	min-width: 240px;
+}
+
+.filter-buttons {
+	align-items: flex-end;
+	display: flex;
+	flex-shrink: 0;
+	gap: 16px;
+}
+
+.filter-buttons button {
+	font-size: 1.05rem;
+	height: 48px;
+	min-width: 160px;
+	padding: 12px 28px;
+	white-space: nowrap;
+}
+
+.btn-primary,
+.btn-secondary {
+	border: none;
+	border-radius: 6px;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-size: 1.05rem;
+	font-weight: 600;
+	min-width: 160px;
+	padding: 12px 28px;
+	white-space: nowrap;
+}
+
+.btn-primary {
+	background: #c8102e;
+	color: white;
+}
+
+.btn-primary:hover {
+	background: #a00d24;
+}
+
+.btn-secondary {
+	background: #555;
+	color: white;
+}
+
+.btn-secondary:hover {
+	background: #333;
+}
+
+.spec-table {
+	background: white;
+	border-collapse: collapse;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+	margin-bottom: 3rem;
+	width: 100%;
+}
+
+.spec-table {
+	background: white;
+	border-collapse: collapse;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+	margin: 0 auto;
+	margin-bottom: 3rem;
+	max-width: 860px;
+	width: 100%;
+}
+
+.spec-table th, .spec-table td {
+	border-bottom: 1px solid #eee;
+	padding: 12px 16px;
+	text-align: left;
+}
+
+.spec-table th {
+	background: #1a1a1a;
+	color: white;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.spec-table tr:hover {
+	background: #f8f9fa;
+}
+
+.spec-table td {
+  font-size: 1.05rem;
+}
+
+.spec-table th:nth-child(1),
+.spec-table td:nth-child(1) { 
+	width: 28%; 
+}
+
+.spec-table th:nth-child(2),
+.spec-table td:nth-child(2) { 
+	width: 52%; 
+}
+
+.spec-table th:nth-child(3),
+.spec-table td:nth-child(3) { 
+	text-align: center; 
+	width: 20%; 
+}
+
+.view-btn {
+	background: #c8102e;
+	border-radius: 6px;
+	color: white;
+	font-weight: 500;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.view-btn:hover {
+	background: #a00d24;
+}
+
+/* Modal */
+.modal {
+	background: rgba(0,0,0,0.9);
+	display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+.modal-content {
+	background: white;
+	border-radius: 8px;
+	margin: 5% auto;
+	max-width: 1100px;
+	overflow: hidden;
+	position: relative;
+	width: 90%;
+}
+
+.close {
+	color: #333;
+	cursor: pointer;
+	font-size: 2.5rem;
+	position: absolute;
+	right: 20px;
+	top: 15px;
+	z-index: 10;
+}
+
+#pdfFrame {
+	border: none;
+	height: 85vh;
+	width: 100%;
+}
+
+.no-results {
+	color: #666;
+	font-size: 1.3rem;
+	padding: 3rem;
+	text-align: center;
+}
+
+/* ================== FOOTER ================== */
+
+.main-footer {
+	background: #1a1a1a;
+	color: white;
+	font-size: 0.95rem;
+	padding: 1rem 0 1.5rem;
+	text-align: center;
+}
+
+.footer-container {
+	margin: 0 auto;
+	max-width: 1200px;
+	padding: 0 20px;
+}
+
+.main-footer p {
+	margin: 0.6rem 0;
+	opacity: 0.9;
+}
+
+.footer-links a {
+	color: white;
+	margin: 0 8px;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+.footer-links a:hover {
+	color: #ffcc00;
+}
