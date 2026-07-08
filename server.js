@@ -58,7 +58,14 @@ app.get('/browse', (req, res) => {
 		);
 	}
 
-	// Get unique manufacturers for dropdown
+    // Sort alphabetically: First by Manufacturer, then by Model
+    filtered.sort((a, b) => {
+        const manufacturerCompare = a.manufacturer.localeCompare(b.manufacturer);
+        if (manufacturerCompare !== 0) return manufacturerCompare;
+        return a.model.localeCompare(b.model);
+    });
+
+    // Get unique manufacturers for dropdown (already sorted)
 	const manufacturers = [...new Set(cranesData.map(c => c.manufacturer))].sort();
 
 	res.render('browse', { 
