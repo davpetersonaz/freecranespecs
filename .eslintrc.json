@@ -1,0 +1,41 @@
+{
+	"env": {
+		"node": true,
+		"es2022": true
+	},
+	"extends": [
+		"airbnb-base",
+		"prettier"
+	],
+	"plugins": ["import"],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"import/order": [
+			"error",
+			{
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					["parent", "sibling", "index"]
+				],
+				"newlines-between": "always",
+				"alphabetize": {
+					"order": "asc"
+				}
+			}
+		],
+		"no-console": ["warn", { "allow": ["log", "error", "warn"] }],
+		"semi": ["error", "always"],
+		"quotes": ["error", "single"]
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".js"]
+			}
+		}
+	}
+}

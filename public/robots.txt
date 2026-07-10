@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://freecranespecs.com/sitemap.xml
+
+# Optional: Block AI crawlers if you want
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /

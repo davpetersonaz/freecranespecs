@@ -1,15 +1,66 @@
-//server.js
-const express = require('express');
+// server.js
 const fs = require('fs');
 const path = require('path');
+
+const cors = require('cors');
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+
 const cranesData = require('./data/cranes.json');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ====================== MIDDLEWARE ======================
+
+// CORS - Allow only your own domain (safe for public site)
+app.use(cors({
+    origin: ['https://freecranespecs.com', 'https://www.freecranespecs.com'],
+    methods: ['GET'],                    // Only allow GET requests
+    allowedHeaders: ['Content-Type']
+}));
+
+// Helmet with strong CSP
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ['\'self\''],
+            scriptSrc: ['\'self\'', '\'unsafe-inline\''],   // EJS + inline scripts
+            styleSrc: ['\'self\'', '\'unsafe-inline\''],
+            imgSrc: ['\'self\'', 'data:'],
+            objectSrc: ['\'none\''],
+            frameSrc: ['\'none\''],                       // Block iframes
+            upgradeInsecureRequests: [],                // Force HTTPS
+        },
+    },
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false,
+}));
+
+// Rate limiting on browse page
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 150,                 // limit each IP to 150 requests
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: 'Too many requests from this IP, please try again later.'
+});
+app.use(limiter);                   // Global limiter
+app.use('/browse', limiter);        // Extra on browse if needed
+
+// Body parsing (good to have even if not heavily used)
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
+
+// ====================== ROUTES ======================
 
 // Homepage
 app.get('/', (req, res) => {
@@ -21,7 +72,7 @@ app.get('/', (req, res) => {
 
 	try {
 		heroFiles = fs.readdirSync(heroesDir)
-			.filter(file => file.match(/\.(jpg|jpeg|png|webp)$/i)); // only images
+            .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file));
 	} catch (err) {
 		console.error('Could not read heroes folder:', err);
 	}
@@ -60,9 +111,8 @@ app.get('/browse', (req, res) => {
 
     // Sort alphabetically: First by Manufacturer, then by Model
     filtered.sort((a, b) => {
-        const manufacturerCompare = a.manufacturer.localeCompare(b.manufacturer);
-        if (manufacturerCompare !== 0) return manufacturerCompare;
-        return a.model.localeCompare(b.model);
+        const manCompare = a.manufacturer.localeCompare(b.manufacturer);
+        return manCompare !== 0 ? manCompare : a.model.localeCompare(b.model);
     });
 
     // Get unique manufacturers for dropdown (already sorted)
@@ -78,4 +128,11 @@ app.get('/browse', (req, res) => {
 // Serve PDFs statically
 app.use('/pdfs', express.static(path.join(__dirname, 'public/pdfs')));
 
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+// 404 handler (optional but nice)
+app.use((req, res) => {
+    res.status(404).send('Page not found');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});

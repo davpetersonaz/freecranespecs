@@ -1,0 +1,7 @@
+Contact: mailto:your-email@domain.com
+Expires: 2027-07-10T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://freecranespecs.com/.well-known/security.txt
+Policy: https://freecranespecs.com/privacy
+
+# Optional: Add a PGP key or bug bounty link later
